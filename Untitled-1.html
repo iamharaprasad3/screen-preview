@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addverb Screen Preview</title>
+    <style>
+      *{
+        padding: 0;
+        margin: 0;
+      }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .mobile-frame {
+            border: 2px solid #ccc;
+            margin: 20px;
+            padding: 10px;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Updated sizes */
+        .phone-1 {
+            width: 430px;
+            height: 932px;
+        }
+
+        .phone-2 {
+            width: 360px;
+            height: 800px;
+        }
+
+        .phone-3 {
+            width: 390px;
+            height: 844px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <img src="https://addverb.com/wp-content/uploads/2023/11/banner-full-.png">
+    <input type="file" id="imageInput" accept="image/*" />
+    
+    <div class="mobile-frame">
+        <h3>Phone 1 (430px × 932px)</h3>
+        <div class="screen phone-1" id="phone1"></div>
+    </div>
+
+    <div class="mobile-frame">
+        <h3>Phone 2 (360px × 800px)</h3>
+        <div class="screen phone-2" id="phone2"></div>
+    </div>
+
+    <div class="mobile-frame">
+        <h3>Phone 3 (390px × 844px)</h3>
+        <div class="screen phone-3" id="phone3"></div>
+    </div>
+
+    <script>
+        const imageInput = document.getElementById('imageInput');
+        const phone1 = document.getElementById('phone1');
+        const phone2 = document.getElementById('phone2');
+        const phone3 = document.getElementById('phone3');
+
+        imageInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    phone1.style.backgroundImage = `url(${imageUrl})`;
+                    phone2.style.backgroundImage = `url(${imageUrl})`;
+                    phone3.style.backgroundImage = `url(${imageUrl})`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
