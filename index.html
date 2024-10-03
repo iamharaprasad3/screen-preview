@@ -5,17 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Addverb Screen Preview</title>
     <style>
-      *{
-        padding: 0;
-        margin: 0;
-      }
+        * {
+            padding: 0;
+            margin: 0;
+        }
         body {
             font-family: Arial, sans-serif;
             text-align: center;
         }
-
-        h3{
-          color:white;
+        h3 {
+            color: white;
         }
         .mobile-frame {
             border: 2px solid #ccc;
@@ -25,7 +24,6 @@
             text-align: center;
             background-color: #3f3f3f;
         }
-
         .screen {
             width: 100%;
             height: 100%;
@@ -33,25 +31,21 @@
             background-repeat: no-repeat;
             background-position: center;
             background-color: white;
+            position: relative;
         }
-
-        /* Updated sizes */
         .phone-1 {
             width: 430px;
             height: 932px;
         }
-
         .phone-2 {
             width: 360px;
             height: 800px;
         }
-
         .phone-3 {
             width: 390px;
             height: 844px;
         }
-
-        img {
+        img, video {
             max-width: 100%;
             height: auto;
         }
@@ -59,7 +53,9 @@
 </head>
 <body>
     <img src="https://addverb.com/wp-content/uploads/2023/11/banner-full-.png">
+    
     <input type="file" id="imageInput" accept="image/*" />
+    <input type="file" id="videoInput" accept="video/*" />
     
     <div class="mobile-frame">
         <h3>Phone 1 (430px × 932px)</h3>
@@ -78,6 +74,7 @@
 
     <script>
         const imageInput = document.getElementById('imageInput');
+        const videoInput = document.getElementById('videoInput');
         const phone1 = document.getElementById('phone1');
         const phone2 = document.getElementById('phone2');
         const phone3 = document.getElementById('phone3');
@@ -93,6 +90,37 @@
                     phone3.style.backgroundImage = `url(${imageUrl})`;
                 };
                 reader.readAsDataURL(file);
+            }
+        });
+
+        videoInput.addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const videoUrl = URL.createObjectURL(file);
+                
+                const videoElement1 = document.createElement('video');
+                videoElement1.src = videoUrl;
+                videoElement1.controls = true;
+                videoElement1.style.width = '100%';
+                videoElement1.style.height = '100%';
+                phone1.innerHTML = ''; 
+                phone1.appendChild(videoElement1);
+
+                const videoElement2 = document.createElement('video');
+                videoElement2.src = videoUrl;
+                videoElement2.controls = true;
+                videoElement2.style.width = '100%';
+                videoElement2.style.height = '100%';
+                phone2.innerHTML = ''; 
+                phone2.appendChild(videoElement2);
+
+                const videoElement3 = document.createElement('video');
+                videoElement3.src = videoUrl;
+                videoElement3.controls = true;
+                videoElement3.style.width = '100%';
+                videoElement3.style.height = '100%';
+                phone3.innerHTML = ''; 
+                phone3.appendChild(videoElement3);
             }
         });
     </script>
